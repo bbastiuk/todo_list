@@ -1,16 +1,26 @@
 from django.urls import path
-from . import views
+from .views import (
+    TaskListView,
+    TaskCreateView,
+    TaskUpdateView,
+    TaskDeleteView,
+    TaskToggleStatusView,
+    TagListView,
+    TagCreateView,
+    TagUpdateView,
+    TagDeleteView,
+)
 
 app_name = 'tasks'
 
 urlpatterns = [
-    path('', views.task_list, name='task_list'),
-    path('tags/', views.tag_list, name='tag_list'),
-    path('task/add/', views.add_task, name='add_task'),
-    path('task/<int:pk>/edit/', views.edit_task, name='edit_task'),
-    path('task/<int:pk>/delete/', views.delete_task, name='delete_task'),
-    path('task/<int:pk>/toggle/', views.toggle_task_status, name='toggle_task_status'),
-    path('tag/add/', views.add_tag, name='add_tag'),
-    path('tag/<int:pk>/edit/', views.edit_tag, name='edit_tag'),
-    path('tag/<int:pk>/delete/', views.delete_tag, name='delete_tag'),
+    path('', TaskListView.as_view(), name='task_list'),
+    path('tags/', TagListView.as_view(), name='tag_list'),
+    path('task/add/', TaskCreateView.as_view(), name='add_task'),
+    path('task/<int:pk>/edit/', TaskUpdateView.as_view(), name='edit_task'),
+    path('task/<int:pk>/delete/', TaskDeleteView.as_view(), name='delete_task'),
+    path('task/<int:pk>/toggle/', TaskToggleStatusView.as_view(), name='toggle_task_status'),
+    path('tag/add/', TagCreateView.as_view(), name='add_tag'),
+    path('tag/<int:pk>/edit/', TagUpdateView.as_view(), name='edit_tag'),
+    path('tag/<int:pk>/delete/', TagDeleteView.as_view(), name='delete_tag'),
 ]
