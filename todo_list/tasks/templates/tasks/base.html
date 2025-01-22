@@ -1,0 +1,22 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'tasks/style.css' %}">
+</head>
+<body>
+    <div class="sidebar">
+        <ul>
+            <li><a href="{% url 'tasks:task_list' %}">Home</a></li>
+            <li><a href="{% url 'tasks:tag_list' %}">Tags</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
