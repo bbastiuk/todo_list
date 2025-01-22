@@ -20,11 +20,14 @@
         {% endif %}
         <p>Tags: {{ task.tags.all|join:", " }}</p>
         <div class="task-actions">
-            {% if task.is_done %}
-                <a class="btn btn-secondary" href="{% url 'tasks:toggle_task_status' task.pk %}">Undo</a>
-            {% else %}
-                <a class="btn btn-success" href="{% url 'tasks:toggle_task_status' task.pk %}">Complete</a>
-            {% endif %}
+            <form method="post" action="{% url 'tasks:toggle_task_status' task.pk %}" style="display:inline;">
+                {% csrf_token %}
+                {% if task.is_done %}
+                    <button type="submit" class="btn btn-secondary">Undo</button>
+                {% else %}
+                    <button type="submit" class="btn btn-success">Complete</button>
+                {% endif %}
+            </form>
             <a class="btn btn-warning" href="{% url 'tasks:edit_task' task.pk %}">Update</a>
             <a class="btn btn-danger" href="{% url 'tasks:delete_task' task.pk %}">Delete</a>
         </div>
